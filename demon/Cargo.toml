@@ -1,0 +1,22 @@
+[package]
+name = "demon_agent"
+version = "0.2.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.41", features = ["full", "process"] }
+log = "0.4"
+simple_logger = "1.16"
+rand = "0.8"
+aes = "0.7"
+block-modes = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+base64 = "0.21"
+winapi = { version = "0.3", features = ["processthreadsapi", "memoryapi", "winnt", "minwindef", "winuser", "errhandlingapi", "winsvc", "libloaderapi"] }
+image = "0.24"
+
+[profile.release]
+strip = true 
+lto = true 
+opt-code = "z"

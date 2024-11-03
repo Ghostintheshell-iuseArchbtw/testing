@@ -1,0 +1,19 @@
+[package]
+name = "rmrware"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aes = "0.8.4"
+cipher = "0.4.4"
+crypter = "0.2.1"
+rand = "0.8.5"
+rand_core = "0.6.4"
+sha256 = "1.5.0"
+sys-info = "0.9.1"
+walkdir = "2.5.0"
+
+[profile.release]
+strip = true 
+lto = true
+
