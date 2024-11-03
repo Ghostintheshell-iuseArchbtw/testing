@@ -1,0 +1,715 @@
+00007FFC228BF64D | CC                       | int3                                    |
+00007FFC228BF64E | CC                       | int3                                    |
+00007FFC228BF64F | CC                       | int3                                    |
+00007FFC228BF650 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF653 | B8 00000000              | mov eax,0                               |
+00007FFC228BF658 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF660 | 75 03                    | jne ntdll.7FFC228BF665                  |
+00007FFC228BF662 | 0F05                     | syscall                                 |
+00007FFC228BF664 | C3                       | ret                                     |
+00007FFC228BF665 | CD 2E                    | int 2E                                  |
+00007FFC228BF667 | C3                       | ret                                     |
+00007FFC228BF668 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF670 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF673 | B8 01000000              | mov eax,1                               |
+00007FFC228BF678 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF680 | 75 03                    | jne ntdll.7FFC228BF685                  |
+00007FFC228BF682 | 0F05                     | syscall                                 |
+00007FFC228BF684 | C3                       | ret                                     |
+00007FFC228BF685 | CD 2E                    | int 2E                                  |
+00007FFC228BF687 | C3                       | ret                                     |
+00007FFC228BF688 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF690 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF693 | B8 02000000              | mov eax,2                               |
+00007FFC228BF698 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF6A0 | 75 03                    | jne ntdll.7FFC228BF6A5                  |
+00007FFC228BF6A2 | 0F05                     | syscall                                 |
+00007FFC228BF6A4 | C3                       | ret                                     |
+00007FFC228BF6A5 | CD 2E                    | int 2E                                  |
+00007FFC228BF6A7 | C3                       | ret                                     |
+00007FFC228BF6A8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF6B0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF6B3 | B8 03000000              | mov eax,3                               |
+00007FFC228BF6B8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF6C0 | 75 03                    | jne ntdll.7FFC228BF6C5                  |
+00007FFC228BF6C2 | 0F05                     | syscall                                 |
+00007FFC228BF6C4 | C3                       | ret                                     |
+00007FFC228BF6C5 | CD 2E                    | int 2E                                  |
+00007FFC228BF6C7 | C3                       | ret                                     |
+00007FFC228BF6C8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF6D0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF6D3 | B8 04000000              | mov eax,4                               |
+00007FFC228BF6D8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF6E0 | 75 03                    | jne ntdll.7FFC228BF6E5                  |
+00007FFC228BF6E2 | 0F05                     | syscall                                 |
+00007FFC228BF6E4 | C3                       | ret                                     |
+00007FFC228BF6E5 | CD 2E                    | int 2E                                  |
+00007FFC228BF6E7 | C3                       | ret                                     |
+00007FFC228BF6E8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF6F0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF6F3 | B8 05000000              | mov eax,5                               |
+00007FFC228BF6F8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF700 | 75 03                    | jne ntdll.7FFC228BF705                  |
+00007FFC228BF702 | 0F05                     | syscall                                 |
+00007FFC228BF704 | C3                       | ret                                     |
+00007FFC228BF705 | CD 2E                    | int 2E                                  |
+00007FFC228BF707 | C3                       | ret                                     |
+00007FFC228BF708 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF710 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF713 | B8 06000000              | mov eax,6                               |
+00007FFC228BF718 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF720 | 75 03                    | jne ntdll.7FFC228BF725                  |
+00007FFC228BF722 | 0F05                     | syscall                                 |
+00007FFC228BF724 | C3                       | ret                                     |
+00007FFC228BF725 | CD 2E                    | int 2E                                  |
+00007FFC228BF727 | C3                       | ret                                     |
+00007FFC228BF728 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF730 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF733 | B8 07000000              | mov eax,7                               |
+00007FFC228BF738 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF740 | 75 03                    | jne ntdll.7FFC228BF745                  |
+00007FFC228BF742 | 0F05                     | syscall                                 |
+00007FFC228BF744 | C3                       | ret                                     |
+00007FFC228BF745 | CD 2E                    | int 2E                                  |
+00007FFC228BF747 | C3                       | ret                                     |
+00007FFC228BF748 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF750 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF753 | B8 08000000              | mov eax,8                               |
+00007FFC228BF758 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF760 | 75 03                    | jne ntdll.7FFC228BF765                  |
+00007FFC228BF762 | 0F05                     | syscall                                 |
+00007FFC228BF764 | C3                       | ret                                     |
+00007FFC228BF765 | CD 2E                    | int 2E                                  |
+00007FFC228BF767 | C3                       | ret                                     |
+00007FFC228BF768 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF770 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF773 | B8 09000000              | mov eax,9                               | 09:'\t'
+00007FFC228BF778 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF780 | 75 03                    | jne ntdll.7FFC228BF785                  |
+00007FFC228BF782 | 0F05                     | syscall                                 |
+00007FFC228BF784 | C3                       | ret                                     |
+00007FFC228BF785 | CD 2E                    | int 2E                                  |
+00007FFC228BF787 | C3                       | ret                                     |
+00007FFC228BF788 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF790 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF793 | B8 0A000000              | mov eax,A                               | 0A:'\n'
+00007FFC228BF798 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF7A0 | 75 03                    | jne ntdll.7FFC228BF7A5                  |
+00007FFC228BF7A2 | 0F05                     | syscall                                 |
+00007FFC228BF7A4 | C3                       | ret                                     |
+00007FFC228BF7A5 | CD 2E                    | int 2E                                  |
+00007FFC228BF7A7 | C3                       | ret                                     |
+00007FFC228BF7A8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF7B0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF7B3 | B8 0B000000              | mov eax,B                               | 0B:'\v'
+00007FFC228BF7B8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF7C0 | 75 03                    | jne ntdll.7FFC228BF7C5                  |
+00007FFC228BF7C2 | 0F05                     | syscall                                 |
+00007FFC228BF7C4 | C3                       | ret                                     |
+00007FFC228BF7C5 | CD 2E                    | int 2E                                  |
+00007FFC228BF7C7 | C3                       | ret                                     |
+00007FFC228BF7C8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF7D0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF7D3 | B8 0C000000              | mov eax,C                               | 0C:'\f'
+00007FFC228BF7D8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF7E0 | 75 03                    | jne ntdll.7FFC228BF7E5                  |
+00007FFC228BF7E2 | 0F05                     | syscall                                 |
+00007FFC228BF7E4 | C3                       | ret                                     |
+00007FFC228BF7E5 | CD 2E                    | int 2E                                  |
+00007FFC228BF7E7 | C3                       | ret                                     |
+00007FFC228BF7E8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF7F0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF7F3 | B8 0D000000              | mov eax,D                               | 0D:'\r'
+00007FFC228BF7F8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF800 | 75 03                    | jne ntdll.7FFC228BF805                  |
+00007FFC228BF802 | 0F05                     | syscall                                 |
+00007FFC228BF804 | C3                       | ret                                     |
+00007FFC228BF805 | CD 2E                    | int 2E                                  |
+00007FFC228BF807 | C3                       | ret                                     |
+00007FFC228BF808 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF810 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF813 | B8 0E000000              | mov eax,E                               |
+00007FFC228BF818 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF820 | 75 03                    | jne ntdll.7FFC228BF825                  |
+00007FFC228BF822 | 0F05                     | syscall                                 |
+00007FFC228BF824 | C3                       | ret                                     |
+00007FFC228BF825 | CD 2E                    | int 2E                                  |
+00007FFC228BF827 | C3                       | ret                                     |
+00007FFC228BF828 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF830 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF833 | B8 0F000000              | mov eax,F                               |
+00007FFC228BF838 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF840 | 75 03                    | jne ntdll.7FFC228BF845                  |
+00007FFC228BF842 | 0F05                     | syscall                                 |
+00007FFC228BF844 | C3                       | ret                                     |
+00007FFC228BF845 | CD 2E                    | int 2E                                  |
+00007FFC228BF847 | C3                       | ret                                     |
+00007FFC228BF848 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF850 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF853 | B8 10000000              | mov eax,10                              |
+00007FFC228BF858 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF860 | 75 03                    | jne ntdll.7FFC228BF865                  |
+00007FFC228BF862 | 0F05                     | syscall                                 |
+00007FFC228BF864 | C3                       | ret                                     |
+00007FFC228BF865 | CD 2E                    | int 2E                                  |
+00007FFC228BF867 | C3                       | ret                                     |
+00007FFC228BF868 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF870 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF873 | B8 11000000              | mov eax,11                              |
+00007FFC228BF878 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF880 | 75 03                    | jne ntdll.7FFC228BF885                  |
+00007FFC228BF882 | 0F05                     | syscall                                 |
+00007FFC228BF884 | C3                       | ret                                     |
+00007FFC228BF885 | CD 2E                    | int 2E                                  |
+00007FFC228BF887 | C3                       | ret                                     |
+00007FFC228BF888 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF890 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF893 | B8 12000000              | mov eax,12                              |
+00007FFC228BF898 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF8A0 | 75 03                    | jne ntdll.7FFC228BF8A5                  |
+00007FFC228BF8A2 | 0F05                     | syscall                                 |
+00007FFC228BF8A4 | C3                       | ret                                     |
+00007FFC228BF8A5 | CD 2E                    | int 2E                                  |
+00007FFC228BF8A7 | C3                       | ret                                     |
+00007FFC228BF8A8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF8B0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF8B3 | B8 13000000              | mov eax,13                              |
+00007FFC228BF8B8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF8C0 | 75 03                    | jne ntdll.7FFC228BF8C5                  |
+00007FFC228BF8C2 | 0F05                     | syscall                                 |
+00007FFC228BF8C4 | C3                       | ret                                     |
+00007FFC228BF8C5 | CD 2E                    | int 2E                                  |
+00007FFC228BF8C7 | C3                       | ret                                     |
+00007FFC228BF8C8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF8D0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF8D3 | B8 14000000              | mov eax,14                              |
+00007FFC228BF8D8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF8E0 | 75 03                    | jne ntdll.7FFC228BF8E5                  |
+00007FFC228BF8E2 | 0F05                     | syscall                                 |
+00007FFC228BF8E4 | C3                       | ret                                     |
+00007FFC228BF8E5 | CD 2E                    | int 2E                                  |
+00007FFC228BF8E7 | C3                       | ret                                     |
+00007FFC228BF8E8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF8F0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF8F3 | B8 15000000              | mov eax,15                              |
+00007FFC228BF8F8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF900 | 75 03                    | jne ntdll.7FFC228BF905                  |
+00007FFC228BF902 | 0F05                     | syscall                                 |
+00007FFC228BF904 | C3                       | ret                                     |
+00007FFC228BF905 | CD 2E                    | int 2E                                  |
+00007FFC228BF907 | C3                       | ret                                     |
+00007FFC228BF908 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF910 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF913 | B8 16000000              | mov eax,16                              |
+00007FFC228BF918 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF920 | 75 03                    | jne ntdll.7FFC228BF925                  |
+00007FFC228BF922 | 0F05                     | syscall                                 |
+00007FFC228BF924 | C3                       | ret                                     |
+00007FFC228BF925 | CD 2E                    | int 2E                                  |
+00007FFC228BF927 | C3                       | ret                                     |
+00007FFC228BF928 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF930 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF933 | B8 17000000              | mov eax,17                              |
+00007FFC228BF938 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF940 | 75 03                    | jne ntdll.7FFC228BF945                  |
+00007FFC228BF942 | 0F05                     | syscall                                 |
+00007FFC228BF944 | C3                       | ret                                     |
+00007FFC228BF945 | CD 2E                    | int 2E                                  |
+00007FFC228BF947 | C3                       | ret                                     |
+00007FFC228BF948 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF950 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF953 | B8 18000000              | mov eax,18                              |
+00007FFC228BF958 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF960 | 75 03                    | jne ntdll.7FFC228BF965                  |
+00007FFC228BF962 | 0F05                     | syscall                                 |
+00007FFC228BF964 | C3                       | ret                                     |
+00007FFC228BF965 | CD 2E                    | int 2E                                  |
+00007FFC228BF967 | C3                       | ret                                     |
+00007FFC228BF968 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF970 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF973 | B8 19000000              | mov eax,19                              |
+00007FFC228BF978 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF980 | 75 03                    | jne ntdll.7FFC228BF985                  |
+00007FFC228BF982 | 0F05                     | syscall                                 |
+00007FFC228BF984 | C3                       | ret                                     |
+00007FFC228BF985 | CD 2E                    | int 2E                                  |
+00007FFC228BF987 | C3                       | ret                                     |
+00007FFC228BF988 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF990 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF993 | B8 1A000000              | mov eax,1A                              |
+00007FFC228BF998 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF9A0 | 75 03                    | jne ntdll.7FFC228BF9A5                  |
+00007FFC228BF9A2 | 0F05                     | syscall                                 |
+00007FFC228BF9A4 | C3                       | ret                                     |
+00007FFC228BF9A5 | CD 2E                    | int 2E                                  |
+00007FFC228BF9A7 | C3                       | ret                                     |
+00007FFC228BF9A8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF9B0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF9B3 | B8 1B000000              | mov eax,1B                              |
+00007FFC228BF9B8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF9C0 | 75 03                    | jne ntdll.7FFC228BF9C5                  |
+00007FFC228BF9C2 | 0F05                     | syscall                                 |
+00007FFC228BF9C4 | C3                       | ret                                     |
+00007FFC228BF9C5 | CD 2E                    | int 2E                                  |
+00007FFC228BF9C7 | C3                       | ret                                     |
+00007FFC228BF9C8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF9D0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF9D3 | B8 1C000000              | mov eax,1C                              |
+00007FFC228BF9D8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BF9E0 | 75 03                    | jne ntdll.7FFC228BF9E5                  |
+00007FFC228BF9E2 | 0F05                     | syscall                                 |
+00007FFC228BF9E4 | C3                       | ret                                     |
+00007FFC228BF9E5 | CD 2E                    | int 2E                                  |
+00007FFC228BF9E7 | C3                       | ret                                     |
+00007FFC228BF9E8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BF9F0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BF9F3 | B8 1D000000              | mov eax,1D                              |
+00007FFC228BF9F8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFA00 | 75 03                    | jne ntdll.7FFC228BFA05                  |
+00007FFC228BFA02 | 0F05                     | syscall                                 |
+00007FFC228BFA04 | C3                       | ret                                     |
+00007FFC228BFA05 | CD 2E                    | int 2E                                  |
+00007FFC228BFA07 | C3                       | ret                                     |
+00007FFC228BFA08 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFA10 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFA13 | B8 1E000000              | mov eax,1E                              |
+00007FFC228BFA18 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFA20 | 75 03                    | jne ntdll.7FFC228BFA25                  |
+00007FFC228BFA22 | 0F05                     | syscall                                 |
+00007FFC228BFA24 | C3                       | ret                                     |
+00007FFC228BFA25 | CD 2E                    | int 2E                                  |
+00007FFC228BFA27 | C3                       | ret                                     |
+00007FFC228BFA28 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFA30 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFA33 | B8 1F000000              | mov eax,1F                              |
+00007FFC228BFA38 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFA40 | 75 03                    | jne ntdll.7FFC228BFA45                  |
+00007FFC228BFA42 | 0F05                     | syscall                                 |
+00007FFC228BFA44 | C3                       | ret                                     |
+00007FFC228BFA45 | CD 2E                    | int 2E                                  |
+00007FFC228BFA47 | C3                       | ret                                     |
+00007FFC228BFA48 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFA50 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFA53 | B8 20000000              | mov eax,20                              | 20:' '
+00007FFC228BFA58 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFA60 | 75 03                    | jne ntdll.7FFC228BFA65                  |
+00007FFC228BFA62 | 0F05                     | syscall                                 |
+00007FFC228BFA64 | C3                       | ret                                     |
+00007FFC228BFA65 | CD 2E                    | int 2E                                  |
+00007FFC228BFA67 | C3                       | ret                                     |
+00007FFC228BFA68 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFA70 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFA73 | B8 21000000              | mov eax,21                              | 21:'!'
+00007FFC228BFA78 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFA80 | 75 03                    | jne ntdll.7FFC228BFA85                  |
+00007FFC228BFA82 | 0F05                     | syscall                                 |
+00007FFC228BFA84 | C3                       | ret                                     |
+00007FFC228BFA85 | CD 2E                    | int 2E                                  |
+00007FFC228BFA87 | C3                       | ret                                     |
+00007FFC228BFA88 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFA90 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFA93 | B8 22000000              | mov eax,22                              | 22:'\"'
+00007FFC228BFA98 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFAA0 | 75 03                    | jne ntdll.7FFC228BFAA5                  |
+00007FFC228BFAA2 | 0F05                     | syscall                                 |
+00007FFC228BFAA4 | C3                       | ret                                     |
+00007FFC228BFAA5 | CD 2E                    | int 2E                                  |
+00007FFC228BFAA7 | C3                       | ret                                     |
+00007FFC228BFAA8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFAB0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFAB3 | B8 23000000              | mov eax,23                              | 23:'#'
+00007FFC228BFAB8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFAC0 | 75 03                    | jne ntdll.7FFC228BFAC5                  |
+00007FFC228BFAC2 | 0F05                     | syscall                                 |
+00007FFC228BFAC4 | C3                       | ret                                     |
+00007FFC228BFAC5 | CD 2E                    | int 2E                                  |
+00007FFC228BFAC7 | C3                       | ret                                     |
+00007FFC228BFAC8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFAD0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFAD3 | B8 24000000              | mov eax,24                              | 24:'$'
+00007FFC228BFAD8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFAE0 | 75 03                    | jne ntdll.7FFC228BFAE5                  |
+00007FFC228BFAE2 | 0F05                     | syscall                                 |
+00007FFC228BFAE4 | C3                       | ret                                     |
+00007FFC228BFAE5 | CD 2E                    | int 2E                                  |
+00007FFC228BFAE7 | C3                       | ret                                     |
+00007FFC228BFAE8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFAF0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFAF3 | B8 25000000              | mov eax,25                              | 25:'%'
+00007FFC228BFAF8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFB00 | 75 03                    | jne ntdll.7FFC228BFB05                  |
+00007FFC228BFB02 | 0F05                     | syscall                                 |
+00007FFC228BFB04 | C3                       | ret                                     |
+00007FFC228BFB05 | CD 2E                    | int 2E                                  |
+00007FFC228BFB07 | C3                       | ret                                     |
+00007FFC228BFB08 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFB10 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFB13 | B8 26000000              | mov eax,26                              | 26:'&'
+00007FFC228BFB18 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFB20 | 75 03                    | jne ntdll.7FFC228BFB25                  |
+00007FFC228BFB22 | 0F05                     | syscall                                 |
+00007FFC228BFB24 | C3                       | ret                                     |
+00007FFC228BFB25 | CD 2E                    | int 2E                                  |
+00007FFC228BFB27 | C3                       | ret                                     |
+00007FFC228BFB28 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFB30 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFB33 | B8 27000000              | mov eax,27                              | 27:'''
+00007FFC228BFB38 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFB40 | 75 03                    | jne ntdll.7FFC228BFB45                  |
+00007FFC228BFB42 | 0F05                     | syscall                                 |
+00007FFC228BFB44 | C3                       | ret                                     |
+00007FFC228BFB45 | CD 2E                    | int 2E                                  |
+00007FFC228BFB47 | C3                       | ret                                     |
+00007FFC228BFB48 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFB50 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFB53 | B8 28000000              | mov eax,28                              | 28:'('
+00007FFC228BFB58 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFB60 | 75 03                    | jne ntdll.7FFC228BFB65                  |
+00007FFC228BFB62 | 0F05                     | syscall                                 |
+00007FFC228BFB64 | C3                       | ret                                     |
+00007FFC228BFB65 | CD 2E                    | int 2E                                  |
+00007FFC228BFB67 | C3                       | ret                                     |
+00007FFC228BFB68 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFB70 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFB73 | B8 29000000              | mov eax,29                              | 29:')'
+00007FFC228BFB78 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFB80 | 75 03                    | jne ntdll.7FFC228BFB85                  |
+00007FFC228BFB82 | 0F05                     | syscall                                 |
+00007FFC228BFB84 | C3                       | ret                                     |
+00007FFC228BFB85 | CD 2E                    | int 2E                                  |
+00007FFC228BFB87 | C3                       | ret                                     |
+00007FFC228BFB88 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFB90 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFB93 | B8 2A000000              | mov eax,2A                              | 2A:'*'
+00007FFC228BFB98 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFBA0 | 75 03                    | jne ntdll.7FFC228BFBA5                  |
+00007FFC228BFBA2 | 0F05                     | syscall                                 |
+00007FFC228BFBA4 | C3                       | ret                                     |
+00007FFC228BFBA5 | CD 2E                    | int 2E                                  |
+00007FFC228BFBA7 | C3                       | ret                                     |
+00007FFC228BFBA8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFBB0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFBB3 | B8 2B000000              | mov eax,2B                              | 2B:'+'
+00007FFC228BFBB8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFBC0 | 75 03                    | jne ntdll.7FFC228BFBC5                  |
+00007FFC228BFBC2 | 0F05                     | syscall                                 |
+00007FFC228BFBC4 | C3                       | ret                                     |
+00007FFC228BFBC5 | CD 2E                    | int 2E                                  |
+00007FFC228BFBC7 | C3                       | ret                                     |
+00007FFC228BFBC8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFBD0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFBD3 | B8 2C000000              | mov eax,2C                              | 2C:','
+00007FFC228BFBD8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFBE0 | 75 03                    | jne ntdll.7FFC228BFBE5                  |
+00007FFC228BFBE2 | 0F05                     | syscall                                 |
+00007FFC228BFBE4 | C3                       | ret                                     |
+00007FFC228BFBE5 | CD 2E                    | int 2E                                  |
+00007FFC228BFBE7 | C3                       | ret                                     |
+00007FFC228BFBE8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFBF0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFBF3 | B8 2D000000              | mov eax,2D                              | 2D:'-'
+00007FFC228BFBF8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFC00 | 75 03                    | jne ntdll.7FFC228BFC05                  |
+00007FFC228BFC02 | 0F05                     | syscall                                 |
+00007FFC228BFC04 | C3                       | ret                                     |
+00007FFC228BFC05 | CD 2E                    | int 2E                                  |
+00007FFC228BFC07 | C3                       | ret                                     |
+00007FFC228BFC08 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFC10 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFC13 | B8 2E000000              | mov eax,2E                              | 2E:'.'
+00007FFC228BFC18 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFC20 | 75 03                    | jne ntdll.7FFC228BFC25                  |
+00007FFC228BFC22 | 0F05                     | syscall                                 |
+00007FFC228BFC24 | C3                       | ret                                     |
+00007FFC228BFC25 | CD 2E                    | int 2E                                  |
+00007FFC228BFC27 | C3                       | ret                                     |
+00007FFC228BFC28 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFC30 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFC33 | B8 2F000000              | mov eax,2F                              | 2F:'/'
+00007FFC228BFC38 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFC40 | 75 03                    | jne ntdll.7FFC228BFC45                  |
+00007FFC228BFC42 | 0F05                     | syscall                                 |
+00007FFC228BFC44 | C3                       | ret                                     |
+00007FFC228BFC45 | CD 2E                    | int 2E                                  |
+00007FFC228BFC47 | C3                       | ret                                     |
+00007FFC228BFC48 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFC50 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFC53 | B8 30000000              | mov eax,30                              | 30:'0'
+00007FFC228BFC58 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFC60 | 75 03                    | jne ntdll.7FFC228BFC65                  |
+00007FFC228BFC62 | 0F05                     | syscall                                 |
+00007FFC228BFC64 | C3                       | ret                                     |
+00007FFC228BFC65 | CD 2E                    | int 2E                                  |
+00007FFC228BFC67 | C3                       | ret                                     |
+00007FFC228BFC68 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFC70 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFC73 | B8 31000000              | mov eax,31                              | 31:'1'
+00007FFC228BFC78 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFC80 | 75 03                    | jne ntdll.7FFC228BFC85                  |
+00007FFC228BFC82 | 0F05                     | syscall                                 |
+00007FFC228BFC84 | C3                       | ret                                     |
+00007FFC228BFC85 | CD 2E                    | int 2E                                  |
+00007FFC228BFC87 | C3                       | ret                                     |
+00007FFC228BFC88 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFC90 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFC93 | B8 32000000              | mov eax,32                              | 32:'2'
+00007FFC228BFC98 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFCA0 | 75 03                    | jne ntdll.7FFC228BFCA5                  |
+00007FFC228BFCA2 | 0F05                     | syscall                                 |
+00007FFC228BFCA4 | C3                       | ret                                     |
+00007FFC228BFCA5 | CD 2E                    | int 2E                                  |
+00007FFC228BFCA7 | C3                       | ret                                     |
+00007FFC228BFCA8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFCB0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFCB3 | B8 33000000              | mov eax,33                              | 33:'3'
+00007FFC228BFCB8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFCC0 | 75 03                    | jne ntdll.7FFC228BFCC5                  |
+00007FFC228BFCC2 | 0F05                     | syscall                                 |
+00007FFC228BFCC4 | C3                       | ret                                     |
+00007FFC228BFCC5 | CD 2E                    | int 2E                                  |
+00007FFC228BFCC7 | C3                       | ret                                     |
+00007FFC228BFCC8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFCD0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFCD3 | B8 34000000              | mov eax,34                              | 34:'4'
+00007FFC228BFCD8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFCE0 | 75 03                    | jne ntdll.7FFC228BFCE5                  |
+00007FFC228BFCE2 | 0F05                     | syscall                                 |
+00007FFC228BFCE4 | C3                       | ret                                     |
+00007FFC228BFCE5 | CD 2E                    | int 2E                                  |
+00007FFC228BFCE7 | C3                       | ret                                     |
+00007FFC228BFCE8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFCF0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFCF3 | B8 35000000              | mov eax,35                              | 35:'5'
+00007FFC228BFCF8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFD00 | 75 03                    | jne ntdll.7FFC228BFD05                  |
+00007FFC228BFD02 | 0F05                     | syscall                                 |
+00007FFC228BFD04 | C3                       | ret                                     |
+00007FFC228BFD05 | CD 2E                    | int 2E                                  |
+00007FFC228BFD07 | C3                       | ret                                     |
+00007FFC228BFD08 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFD10 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFD13 | B8 36000000              | mov eax,36                              | 36:'6'
+00007FFC228BFD18 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFD20 | 75 03                    | jne ntdll.7FFC228BFD25                  |
+00007FFC228BFD22 | 0F05                     | syscall                                 |
+00007FFC228BFD24 | C3                       | ret                                     |
+00007FFC228BFD25 | CD 2E                    | int 2E                                  |
+00007FFC228BFD27 | C3                       | ret                                     |
+00007FFC228BFD28 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFD30 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFD33 | B8 37000000              | mov eax,37                              | 37:'7'
+00007FFC228BFD38 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFD40 | 75 03                    | jne ntdll.7FFC228BFD45                  |
+00007FFC228BFD42 | 0F05                     | syscall                                 |
+00007FFC228BFD44 | C3                       | ret                                     |
+00007FFC228BFD45 | CD 2E                    | int 2E                                  |
+00007FFC228BFD47 | C3                       | ret                                     |
+00007FFC228BFD48 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFD50 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFD53 | B8 38000000              | mov eax,38                              | 38:'8'
+00007FFC228BFD58 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFD60 | 75 03                    | jne ntdll.7FFC228BFD65                  |
+00007FFC228BFD62 | 0F05                     | syscall                                 |
+00007FFC228BFD64 | C3                       | ret                                     |
+00007FFC228BFD65 | CD 2E                    | int 2E                                  |
+00007FFC228BFD67 | C3                       | ret                                     |
+00007FFC228BFD68 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFD70 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFD73 | B8 39000000              | mov eax,39                              | 39:'9'
+00007FFC228BFD78 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFD80 | 75 03                    | jne ntdll.7FFC228BFD85                  |
+00007FFC228BFD82 | 0F05                     | syscall                                 |
+00007FFC228BFD84 | C3                       | ret                                     |
+00007FFC228BFD85 | CD 2E                    | int 2E                                  |
+00007FFC228BFD87 | C3                       | ret                                     |
+00007FFC228BFD88 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFD90 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFD93 | B8 3A000000              | mov eax,3A                              | 3A:':'
+00007FFC228BFD98 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFDA0 | 75 03                    | jne ntdll.7FFC228BFDA5                  |
+00007FFC228BFDA2 | 0F05                     | syscall                                 |
+00007FFC228BFDA4 | C3                       | ret                                     |
+00007FFC228BFDA5 | CD 2E                    | int 2E                                  |
+00007FFC228BFDA7 | C3                       | ret                                     |
+00007FFC228BFDA8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFDB0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFDB3 | B8 3B000000              | mov eax,3B                              | 3B:';'
+00007FFC228BFDB8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFDC0 | 75 03                    | jne ntdll.7FFC228BFDC5                  |
+00007FFC228BFDC2 | 0F05                     | syscall                                 |
+00007FFC228BFDC4 | C3                       | ret                                     |
+00007FFC228BFDC5 | CD 2E                    | int 2E                                  |
+00007FFC228BFDC7 | C3                       | ret                                     |
+00007FFC228BFDC8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFDD0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFDD3 | B8 3C000000              | mov eax,3C                              | 3C:'<'
+00007FFC228BFDD8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFDE0 | 75 03                    | jne ntdll.7FFC228BFDE5                  |
+00007FFC228BFDE2 | 0F05                     | syscall                                 |
+00007FFC228BFDE4 | C3                       | ret                                     |
+00007FFC228BFDE5 | CD 2E                    | int 2E                                  |
+00007FFC228BFDE7 | C3                       | ret                                     |
+00007FFC228BFDE8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFDF0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFDF3 | B8 3D000000              | mov eax,3D                              | 3D:'='
+00007FFC228BFDF8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFE00 | 75 03                    | jne ntdll.7FFC228BFE05                  |
+00007FFC228BFE02 | 0F05                     | syscall                                 |
+00007FFC228BFE04 | C3                       | ret                                     |
+00007FFC228BFE05 | CD 2E                    | int 2E                                  |
+00007FFC228BFE07 | C3                       | ret                                     |
+00007FFC228BFE08 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFE10 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFE13 | B8 3E000000              | mov eax,3E                              | 3E:'>'
+00007FFC228BFE18 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFE20 | 75 03                    | jne ntdll.7FFC228BFE25                  |
+00007FFC228BFE22 | 0F05                     | syscall                                 |
+00007FFC228BFE24 | C3                       | ret                                     |
+00007FFC228BFE25 | CD 2E                    | int 2E                                  |
+00007FFC228BFE27 | C3                       | ret                                     |
+00007FFC228BFE28 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFE30 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFE33 | B8 3F000000              | mov eax,3F                              | 3F:'?'
+00007FFC228BFE38 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFE40 | 75 03                    | jne ntdll.7FFC228BFE45                  |
+00007FFC228BFE42 | 0F05                     | syscall                                 |
+00007FFC228BFE44 | C3                       | ret                                     |
+00007FFC228BFE45 | CD 2E                    | int 2E                                  |
+00007FFC228BFE47 | C3                       | ret                                     |
+00007FFC228BFE48 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFE50 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFE53 | B8 40000000              | mov eax,40                              | 40:'@'
+00007FFC228BFE58 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFE60 | 75 03                    | jne ntdll.7FFC228BFE65                  |
+00007FFC228BFE62 | 0F05                     | syscall                                 |
+00007FFC228BFE64 | C3                       | ret                                     |
+00007FFC228BFE65 | CD 2E                    | int 2E                                  |
+00007FFC228BFE67 | C3                       | ret                                     |
+00007FFC228BFE68 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFE70 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFE73 | B8 41000000              | mov eax,41                              | 41:'A'
+00007FFC228BFE78 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFE80 | 75 03                    | jne ntdll.7FFC228BFE85                  |
+00007FFC228BFE82 | 0F05                     | syscall                                 |
+00007FFC228BFE84 | C3                       | ret                                     |
+00007FFC228BFE85 | CD 2E                    | int 2E                                  |
+00007FFC228BFE87 | C3                       | ret                                     |
+00007FFC228BFE88 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFE90 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFE93 | B8 42000000              | mov eax,42                              | 42:'B'
+00007FFC228BFE98 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFEA0 | 75 03                    | jne ntdll.7FFC228BFEA5                  |
+00007FFC228BFEA2 | 0F05                     | syscall                                 |
+00007FFC228BFEA4 | C3                       | ret                                     |
+00007FFC228BFEA5 | CD 2E                    | int 2E                                  |
+00007FFC228BFEA7 | C3                       | ret                                     |
+00007FFC228BFEA8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFEB0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFEB3 | B8 43000000              | mov eax,43                              | 43:'C'
+00007FFC228BFEB8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFEC0 | 75 03                    | jne ntdll.7FFC228BFEC5                  |
+00007FFC228BFEC2 | 0F05                     | syscall                                 |
+00007FFC228BFEC4 | C3                       | ret                                     |
+00007FFC228BFEC5 | CD 2E                    | int 2E                                  |
+00007FFC228BFEC7 | C3                       | ret                                     |
+00007FFC228BFEC8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFED0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFED3 | B8 44000000              | mov eax,44                              | 44:'D'
+00007FFC228BFED8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFEE0 | 75 03                    | jne ntdll.7FFC228BFEE5                  |
+00007FFC228BFEE2 | 0F05                     | syscall                                 |
+00007FFC228BFEE4 | C3                       | ret                                     |
+00007FFC228BFEE5 | CD 2E                    | int 2E                                  |
+00007FFC228BFEE7 | C3                       | ret                                     |
+00007FFC228BFEE8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFEF0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFEF3 | B8 45000000              | mov eax,45                              | 45:'E'
+00007FFC228BFEF8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFF00 | 75 03                    | jne ntdll.7FFC228BFF05                  |
+00007FFC228BFF02 | 0F05                     | syscall                                 |
+00007FFC228BFF04 | C3                       | ret                                     |
+00007FFC228BFF05 | CD 2E                    | int 2E                                  |
+00007FFC228BFF07 | C3                       | ret                                     |
+00007FFC228BFF08 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFF10 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFF13 | B8 46000000              | mov eax,46                              | 46:'F'
+00007FFC228BFF18 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFF20 | 75 03                    | jne ntdll.7FFC228BFF25                  |
+00007FFC228BFF22 | 0F05                     | syscall                                 |
+00007FFC228BFF24 | C3                       | ret                                     |
+00007FFC228BFF25 | CD 2E                    | int 2E                                  |
+00007FFC228BFF27 | C3                       | ret                                     |
+00007FFC228BFF28 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFF30 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFF33 | B8 47000000              | mov eax,47                              | 47:'G'
+00007FFC228BFF38 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFF40 | 75 03                    | jne ntdll.7FFC228BFF45                  |
+00007FFC228BFF42 | 0F05                     | syscall                                 |
+00007FFC228BFF44 | C3                       | ret                                     |
+00007FFC228BFF45 | CD 2E                    | int 2E                                  |
+00007FFC228BFF47 | C3                       | ret                                     |
+00007FFC228BFF48 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFF50 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFF53 | B8 48000000              | mov eax,48                              | 48:'H'
+00007FFC228BFF58 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFF60 | 75 03                    | jne ntdll.7FFC228BFF65                  |
+00007FFC228BFF62 | 0F05                     | syscall                                 |
+00007FFC228BFF64 | C3                       | ret                                     |
+00007FFC228BFF65 | CD 2E                    | int 2E                                  |
+00007FFC228BFF67 | C3                       | ret                                     |
+00007FFC228BFF68 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFF70 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFF73 | B8 49000000              | mov eax,49                              | 49:'I'
+00007FFC228BFF78 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFF80 | 75 03                    | jne ntdll.7FFC228BFF85                  |
+00007FFC228BFF82 | 0F05                     | syscall                                 |
+00007FFC228BFF84 | C3                       | ret                                     |
+00007FFC228BFF85 | CD 2E                    | int 2E                                  |
+00007FFC228BFF87 | C3                       | ret                                     |
+00007FFC228BFF88 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFF90 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFF93 | B8 4A000000              | mov eax,4A                              | 4A:'J'
+00007FFC228BFF98 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFFA0 | 75 03                    | jne ntdll.7FFC228BFFA5                  |
+00007FFC228BFFA2 | 0F05                     | syscall                                 |
+00007FFC228BFFA4 | C3                       | ret                                     |
+00007FFC228BFFA5 | CD 2E                    | int 2E                                  |
+00007FFC228BFFA7 | C3                       | ret                                     |
+00007FFC228BFFA8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFFB0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFFB3 | B8 4B000000              | mov eax,4B                              | 4B:'K'
+00007FFC228BFFB8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFFC0 | 75 03                    | jne ntdll.7FFC228BFFC5                  |
+00007FFC228BFFC2 | 0F05                     | syscall                                 |
+00007FFC228BFFC4 | C3                       | ret                                     |
+00007FFC228BFFC5 | CD 2E                    | int 2E                                  |
+00007FFC228BFFC7 | C3                       | ret                                     |
+00007FFC228BFFC8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFFD0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFFD3 | B8 4C000000              | mov eax,4C                              | 4C:'L'
+00007FFC228BFFD8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228BFFE0 | 75 03                    | jne ntdll.7FFC228BFFE5                  |
+00007FFC228BFFE2 | 0F05                     | syscall                                 |
+00007FFC228BFFE4 | C3                       | ret                                     |
+00007FFC228BFFE5 | CD 2E                    | int 2E                                  |
+00007FFC228BFFE7 | C3                       | ret                                     |
+00007FFC228BFFE8 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228BFFF0 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228BFFF3 | B8 4D000000              | mov eax,4D                              | 4D:'M'
+00007FFC228BFFF8 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228C0000 | 75 03                    | jne ntdll.7FFC228C0005                  |
+00007FFC228C0002 | 0F05                     | syscall                                 |
+00007FFC228C0004 | C3                       | ret                                     |
+00007FFC228C0005 | CD 2E                    | int 2E                                  |
+00007FFC228C0007 | C3                       | ret                                     |
+00007FFC228C0008 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228C0010 | 4C:8BD1                  | mov r10,rcx                             |
+00007FFC228C0013 | B8 4E000000              | mov eax,4E                              | 4E:'N'
+00007FFC228C0018 | F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1           |
+00007FFC228C0020 | 75 03                    | jne ntdll.7FFC228C0025                  |
+00007FFC228C0022 | 0F05                     | syscall                                 |
+00007FFC228C0024 | C3                       | ret                                     |
+00007FFC228C0025 | CD 2E                    | int 2E                                  |
+00007FFC228C0027 | C3                       | ret                                     |
+00007FFC228C0028 | 0F1F8400 00000000        | nop dword ptr ds:[rax+rax],eax          |
+00007FFC228C0030 | 4C:8BD1                  | mov r10,rcx                             |
