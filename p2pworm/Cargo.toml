@@ -1,0 +1,21 @@
+[package]
+name = "worm"
+version = "0.1.0"
+edition = "2021"
+
+# Optional: Add a description of your package
+description = "A stealthy worm for Windows targeting shared files."
+
+[dependencies]
+tokio = { version = "1.26", features = ["full"] }
+openssl = { version = "0.10", features = ["vendored"] }
+rand = "0.8"
+dirs = "5.0"
+winapi = { version = "0.3", features = ["winnt", "processthreadsapi", "handleapi", "debugapi"] }
+
+[profile.dev]
+opt-level = 2
+
+[profile.release]
+opt-level = 3
+
