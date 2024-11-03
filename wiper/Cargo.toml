@@ -1,0 +1,20 @@
+[package]
+name = "wiper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+base64 = "0.22.1"
+openssl = { version = "0.10", features = ["vendored"] }
+rand = "0.8"
+winapi = { version = "0.3", features = ["debugapi"] }
+ssh2 = "0.9"  # Check for the latest version
+reqwest = { version = "0.12.8", features = ["blocking"] }
+ftp = "3.0.1"                                                      
+[profile.release]
+opt-level = "z"            # Optimize for size
+lto = "fat"                # Link Time Optimization to reduce binary size
+codegen-units = 1          # Helps with LTO to reduce size further
+strip = true               # Removes debug info to make binaries smaller
+panic = "abort"            # Removes stack unwinding information
+

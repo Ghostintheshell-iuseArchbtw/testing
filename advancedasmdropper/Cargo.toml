@@ -1,0 +1,9 @@
+[package]
+name = "advancedasmdropper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+winapi = { version = "0.3", features = ["winbase", "processthreadsapi", "memoryapi", "handleapi", "minwindef"] }
+rand = "0.8"  # For generating random delays
+
